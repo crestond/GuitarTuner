@@ -11,7 +11,11 @@ public class MicMonitor : MonoBehaviour
     public AudioSource audioSource;
     public int sampleRate = 44100;
     public int clipLengthSeconds = 1;
-
+    public float minFreq = 70f;
+    public float maxFreq = 450f;
+    public float minRmsForPitch = 0.01f;
+    private float smoothedHz = 0f;
+    public float smoothSpeed = 12f; // higher = faster response
     private String micDevice;
     private float[] rmsBuffer = new float[1024];
 
@@ -46,16 +50,31 @@ public class MicMonitor : MonoBehaviour
     {
         if (audioSource == null || audioSource.clip == null) return;
 
-        int micPos = Microphone.GetPosition(micDevice);
-        if (micPos <= 0) return;
+    int micPos = Microphone.GetPosition(micDevice);
+    if (micPos <= 0) return;
 
-        int start = micPos - rmsBuffer.Length;
-        if (start < 0) return;
+    int start = micPos - rmsBuffer.Length;
+    if (start < 0) return;
 
-        audioSource.clip.GetData(rmsBuffer, start);
+    // This line is the missing link: gets real mic samples
+    audioSource.clip.GetData(rmsBuffer, start);
 
-        float rms = ComputeRMS(rmsBuffer);
-        statusText.text = $"Mic: {micDevice}\nRMS Level: {rms:F4}";
+    float rms = ComputeRMS(rmsBuffer);
+
+    float hz = PitchDetector.DetectPitchAutocorrelation(
+        rmsBuffer, sampleRate, minFreq, maxFreq, minRmsForPitch
+    );
+
+    if (hz > 0f)
+        smoothedHz = Mathf.Lerp(smoothedHz, hz, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
+    else
+        smoothedHz = Mathf.Lerp(smoothedHz, 0f, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
+
+    statusText.text =
+        $"Mic: {micDevice}\n" +
+        $"RMS: {rms:F4}\n" +
+        $"Pitch: {(smoothedHz > 0 ? smoothedHz.ToString("F1") + " Hz" : "--")}";
+
     }
 
         private float ComputeRMS(float[] samples)
