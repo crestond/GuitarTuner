@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections;
 
 public class MicMonitor : MonoBehaviour
 {
@@ -17,72 +18,64 @@ public class MicMonitor : MonoBehaviour
     private float smoothedHz = 0f;
     public float smoothSpeed = 12f; // higher = faster response
     private String micDevice;
-    private float[] rmsBuffer = new float[1024];
+    private float[] rmsBuffer = new float[4096]; // small buffer for RMS and pitch detection
 
-    void Start()
+    IEnumerator Start()
     {
         if (Microphone.devices.Length == 0)
         {
-            statusText.text = "No Microphone Detected";
-            Debug.LogError("No microphone devices found.");
-            return;
+            statusText.text = "No microphone detected!";
+            yield break;
         }
-        
+
         micDevice = Microphone.devices[0];
 
         if (audioSource == null) audioSource = GetComponent<AudioSource>();
         if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
 
         audioSource.loop = true;
-        audioSource.mute = true; // prevent feedback
+        audioSource.mute = true;
         audioSource.clip = Microphone.Start(micDevice, true, clipLengthSeconds, sampleRate);
 
-        // Wait until the microphone starts recording
-        while (Microphone.GetPosition(micDevice) <= 0) { }
+        while (Microphone.GetPosition(micDevice) <= 0) yield return null; // wait until mic starts
 
         audioSource.Play();
+        statusText.text = $"Using mic: {micDevice}";
 
-        statusText.text = $"Mic: {micDevice} (recording)";
-        Debug.Log($"Mic started: {micDevice}");
     }
 
     void Update()
     {
-        if (audioSource == null || audioSource.clip == null) return;
+        if (audioSource.clip == null || audioSource == null) return;
 
-    int micPos = Microphone.GetPosition(micDevice);
-    if (micPos <= 0) return;
+        int micPos = Microphone.GetPosition(micDevice);
+        int start = micPos - rmsBuffer.Length;
+        if (start < 0) return; // not enough data yet
 
-    int start = micPos - rmsBuffer.Length;
-    if (start < 0) return;
+        audioSource.clip.GetData(rmsBuffer, start);
 
-    // This line is the missing link: gets real mic samples
-    audioSource.clip.GetData(rmsBuffer, start);
+        float rms = PitchMath.ComputeRMS(rmsBuffer);
+        float hz = PitchDetector.DetectPitchAutocorrelation(rmsBuffer, sampleRate, minFreq, maxFreq, minRmsForPitch);
 
-    float rms = ComputeRMS(rmsBuffer);
+        if (hz > 0f)
+        {
+            smoothedHz = Mathf.Lerp(smoothedHz, hz, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
+        }
+        else
+        {
+            smoothedHz = Mathf.Lerp(smoothedHz, 0f, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
+        }
 
-    float hz = PitchDetector.DetectPitchAutocorrelation(
-        rmsBuffer, sampleRate, minFreq, maxFreq, minRmsForPitch
-    );
+        // Update the text with percieved note and octave
 
-    if (hz > 0f)
-        smoothedHz = Mathf.Lerp(smoothedHz, hz, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
-    else
-        smoothedHz = Mathf.Lerp(smoothedHz, 0f, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
+        int midi = NoteUtil.FrequencyToMidi(smoothedHz);
+        float target = (midi >= 0) ? NoteUtil.MidiToFrequency(midi) : 0f;
+        float cents = (midi >= 0) ? PitchMath.CentsOff(smoothedHz, target) : 0f;
 
-    statusText.text =
-        $"Mic: {micDevice}\n" +
-        $"RMS: {rms:F4}\n" +
-        $"Pitch: {(smoothedHz > 0 ? smoothedHz.ToString("F1") + " Hz" : "--")}";
+        statusText.text = $"Mic: {micDevice}\n" +
+                          $"RMS: {rms:F4}\n" +
+                          $"Pitch: {(smoothedHz > 0f ? smoothedHz.ToString("F1") + " Hz" : "--")}\n" +
+                          $"Note: {NoteUtil.MidiToName(midi)} ({cents:+0.0;-0.0;0.0} cents)";
 
-    }
-
-        private float ComputeRMS(float[] samples)
-    {
-        double sum = 0.0;
-        for (int i = 0; i < samples.Length; i++)
-            sum += samples[i] * samples[i];
-
-        return Mathf.Sqrt((float)(sum / samples.Length));
     }
 }

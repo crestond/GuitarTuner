@@ -11,7 +11,7 @@ public static class PitchDetector
         float minRms = 0.01f)
     {
         // Gate on volume so we don't "detect pitch" in silence
-        float rms = ComputeRMS(buffer);
+        float rms = PitchMath.ComputeRMS(buffer);
         if (rms < minRms) return 0f;
 
         int size = buffer.Length;
@@ -54,12 +54,5 @@ public static class PitchDetector
         // Basic sanity check
         if (freq < minFreq || freq > maxFreq) return 0f;
         return freq;
-    }
-
-    private static float ComputeRMS(float[] samples)
-    {
-        double sum = 0.0;
-        for (int i = 0; i < samples.Length; i++) sum += samples[i] * samples[i];
-        return Mathf.Sqrt((float)(sum / samples.Length));
     }
 }
