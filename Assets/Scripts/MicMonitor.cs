@@ -20,8 +20,17 @@ public class MicMonitor : MonoBehaviour
     private String micDevice;
     private float[] rmsBuffer = new float[4096]; // small buffer for RMS and pitch detection
 
+    public TunerManager tunerManager;
+
     IEnumerator Start()
     {
+
+        Debug.Log($"[MicMonitor Start] TunerManager ref = {(tunerManager != null ? tunerManager.gameObject.name : "NULL")}");
+    
+        if (tunerManager != null)
+        {
+            Debug.Log($"[MicMonitor Start] TunerManager InstanceID = {tunerManager.GetInstanceID()}");
+        }
         if (Microphone.devices.Length == 0)
         {
             statusText.text = "No microphone detected!";
@@ -46,36 +55,27 @@ public class MicMonitor : MonoBehaviour
 
     void Update()
     {
-        if (audioSource.clip == null || audioSource == null) return;
+        if (audioSource == null || audioSource.clip == null || tunerManager == null) return;
 
         int micPos = Microphone.GetPosition(micDevice);
         int start = micPos - rmsBuffer.Length;
-        if (start < 0) return; // not enough data yet
+        if (start < 0) return;
 
         audioSource.clip.GetData(rmsBuffer, start);
 
-        float rms = PitchMath.ComputeRMS(rmsBuffer);
         float hz = PitchDetector.DetectPitchAutocorrelation(rmsBuffer, sampleRate, minFreq, maxFreq, minRmsForPitch);
 
         if (hz > 0f)
-        {
             smoothedHz = Mathf.Lerp(smoothedHz, hz, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
-        }
         else
-        {
             smoothedHz = Mathf.Lerp(smoothedHz, 0f, 1f - Mathf.Exp(-smoothSpeed * Time.deltaTime));
-        }
 
-        // Update the text with percieved note and octave
+        TuningNote targetNote = tunerManager.GetSelectedTarget();
+        float centsOff = PitchMath.CentsOff(smoothedHz, targetNote.targetFrequency);
 
-        int midi = NoteUtil.FrequencyToMidi(smoothedHz);
-        float target = (midi >= 0) ? NoteUtil.MidiToFrequency(midi) : 0f;
-        float cents = (midi >= 0) ? PitchMath.CentsOff(smoothedHz, target) : 0f;
-
-        statusText.text = $"Mic: {micDevice}\n" +
-                          $"RMS: {rms:F4}\n" +
-                          $"Pitch: {(smoothedHz > 0f ? smoothedHz.ToString("F1") + " Hz" : "--")}\n" +
-                          $"Note: {NoteUtil.MidiToName(midi)} ({cents:+0.0;-0.0;0.0} cents)";
-
+        statusText.text =
+            $"Target: {targetNote.noteName} ({targetNote.targetFrequency:F2} Hz)\n" +
+            $"Detected: {(smoothedHz > 0f ? smoothedHz.ToString("F1") + " Hz" : "--")}\n" +
+            $"Cents Off: {centsOff:+0.0;-0.0;0.0}";
     }
 }
