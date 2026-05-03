@@ -222,7 +222,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -530,7 +530,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -703,7 +703,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1888,7 +1888,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2173,7 +2173,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2288,75 +2288,6 @@ MonoBehaviour:
     targetFrequency: 246.94
   - noteName: E4
     targetFrequency: 329.63
-  availableNotes:
-  - noteName: C2
-    targetFrequency: 65.41
-  - noteName: C#2
-    targetFrequency: 69.3
-  - noteName: D2
-    targetFrequency: 73.42
-  - noteName: D#2
-    targetFrequency: 77.78
-  - noteName: E2
-    targetFrequency: 82.41
-  - noteName: F2
-    targetFrequency: 87.31
-  - noteName: F#2
-    targetFrequency: 92.5
-  - noteName: G2
-    targetFrequency: 98
-  - noteName: G#2
-    targetFrequency: 103.83
-  - noteName: A2
-    targetFrequency: 110
-  - noteName: A#2
-    targetFrequency: 116.54
-  - noteName: B2
-    targetFrequency: 123.47
-  - noteName: C3
-    targetFrequency: 130.81
-  - noteName: C#3
-    targetFrequency: 138.59
-  - noteName: D3
-    targetFrequency: 146.83
-  - noteName: D#3
-    targetFrequency: 155.56
-  - noteName: E3
-    targetFrequency: 164.81
-  - noteName: F3
-    targetFrequency: 174.61
-  - noteName: F#3
-    targetFrequency: 185
-  - noteName: G3
-    targetFrequency: 196
-  - noteName: G#3
-    targetFrequency: 207.65
-  - noteName: A3
-    targetFrequency: 220
-  - noteName: A#3
-    targetFrequency: 233.08
-  - noteName: B3
-    targetFrequency: 246.94
-  - noteName: C4
-    targetFrequency: 261.63
-  - noteName: C#4
-    targetFrequency: 277.18
-  - noteName: D4
-    targetFrequency: 293.66
-  - noteName: D#4
-    targetFrequency: 311.13
-  - noteName: E4
-    targetFrequency: 329.63
-  - noteName: F4
-    targetFrequency: 349.23
-  - noteName: F#4
-    targetFrequency: 369.99
-  - noteName: G4
-    targetFrequency: 392
-  - noteName: G#4
-    targetFrequency: 415.3
-  - noteName: A4
-    targetFrequency: 440
   stringNoteDropdowns:
   - {fileID: 2131401188}
   - {fileID: 360387282}
@@ -2364,7 +2295,85 @@ MonoBehaviour:
   - {fileID: 10060702}
   - {fileID: 1278808586}
   - {fileID: 1157253655}
-  selectedNoteIndices: 04000000090000000e00000013000000170000001c000000
+  stringOptions:
+  - stringName: Low E
+    allowedNotes:
+    - noteName: C2
+      targetFrequency: 65.41
+    - noteName: C#2
+      targetFrequency: 69.3
+    - noteName: D2
+      targetFrequency: 73.42
+    - noteName: D#2
+      targetFrequency: 77.78
+    - noteName: E2
+      targetFrequency: 82.41
+    selectedNoteIndex: 4
+  - stringName: A
+    allowedNotes:
+    - noteName: G2
+      targetFrequency: 98
+    - noteName: G#2
+      targetFrequency: 103.83
+    - noteName: A2
+      targetFrequency: 110
+    - noteName: A#2
+      targetFrequency: 116.54
+    - noteName: B2
+      targetFrequency: 123.47
+    selectedNoteIndex: 2
+  - stringName: D
+    allowedNotes:
+    - noteName: C3
+      targetFrequency: 130.81
+    - noteName: C#3
+      targetFrequency: 138.59
+    - noteName: D3
+      targetFrequency: 146.83
+    - noteName: D#3
+      targetFrequency: 155.56
+    - noteName: E3
+      targetFrequency: 164.81
+    selectedNoteIndex: 2
+  - stringName: G
+    allowedNotes:
+    - noteName: F3
+      targetFrequency: 174.61
+    - noteName: F#3
+      targetFrequency: 185
+    - noteName: G3
+      targetFrequency: 196
+    - noteName: G#3
+      targetFrequency: 207.65
+    - noteName: A3
+      targetFrequency: 220
+    selectedNoteIndex: 2
+  - stringName: B
+    allowedNotes:
+    - noteName: A3
+      targetFrequency: 220
+    - noteName: A#3
+      targetFrequency: 233.08
+    - noteName: B3
+      targetFrequency: 246.94
+    - noteName: C4
+      targetFrequency: 261.63
+    - noteName: C#4
+      targetFrequency: 277.18
+    selectedNoteIndex: 2
+  - stringName: High E
+    allowedNotes:
+    - noteName: D4
+      targetFrequency: 293.66
+    - noteName: D#4
+      targetFrequency: 311.13
+    - noteName: E4
+      targetFrequency: 329.63
+    - noteName: F4
+      targetFrequency: 349.23
+    - noteName: F#4
+      targetFrequency: 369.99
+    selectedNoteIndex: 2
   selectedStringIndex: 0
 --- !u!4 &468108023
 Transform:
@@ -3358,7 +3367,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5190,7 +5199,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5339,7 +5348,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5893,7 +5902,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6066,7 +6075,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -7761,6 +7770,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736972776}
   m_CullTransparentMesh: 1
+--- !u!1 &1746021090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746021091}
+  - component: {fileID: 1746021093}
+  - component: {fileID: 1746021092}
+  m_Layer: 5
+  m_Name: BackgroundPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1746021091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746021090}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1891476931}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00048161, y: -0.000030518}
+  m_SizeDelta: {x: 488.5, y: 610}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1746021092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746021090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.047058824, g: 0.047058824, b: 0.05490196, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1746021093
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746021090}
+  m_CullTransparentMesh: 1
 --- !u!1 &1774176212
 GameObject:
   m_ObjectHideFlags: 0
@@ -8493,6 +8577,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1746021091}
   - {fileID: 1194107730}
   - {fileID: 216460397}
   - {fileID: 1611756608}
@@ -9161,7 +9246,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -9867,7 +9952,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.76862746, g: 0.76862746, b: 0.76862746, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
