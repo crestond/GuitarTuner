@@ -30,6 +30,8 @@ public class MicMonitor : MonoBehaviour
     public float maxFreq = 450f;
     public float targetWindowLowerMultiplier = 0.75f;
     public float targetWindowUpperMultiplier = 1.35f;
+    public float higherStringTargetWindowLowerMultiplier = 0.88f;
+    public float higherStringTargetWindowUpperMultiplier = 1.15f;
     public float minRmsForPitch = 0.01f;
     private float smoothedHz = 0f;
     public float smoothSpeed = 12f; // higher = faster response
@@ -113,8 +115,12 @@ public class MicMonitor : MonoBehaviour
 
         audioSource.clip.GetData(rmsBuffer, start);
 
-        float detectionMinFreq = Mathf.Max(minFreq, targetNote.targetFrequency * targetWindowLowerMultiplier);
-        float detectionMaxFreq = Mathf.Min(maxFreq, targetNote.targetFrequency * targetWindowUpperMultiplier);
+        bool isHigherString = ShouldHoldDisplayForHigherString(targetNote);
+        float lowerMultiplier = isHigherString ? higherStringTargetWindowLowerMultiplier : targetWindowLowerMultiplier;
+        float upperMultiplier = isHigherString ? higherStringTargetWindowUpperMultiplier : targetWindowUpperMultiplier;
+
+        float detectionMinFreq = Mathf.Max(minFreq, targetNote.targetFrequency * lowerMultiplier);
+        float detectionMaxFreq = Mathf.Min(maxFreq, targetNote.targetFrequency * upperMultiplier);
         if (detectionMaxFreq <= detectionMinFreq)
         {
             detectionMinFreq = minFreq;
@@ -126,7 +132,8 @@ public class MicMonitor : MonoBehaviour
             sampleRate,
             detectionMinFreq,
             detectionMaxFreq,
-            minRmsForPitch
+            minRmsForPitch,
+            targetNote.targetFrequency
         );
 
         if (hz > 0f)

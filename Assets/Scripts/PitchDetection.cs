@@ -8,7 +8,8 @@ public static class PitchDetector
         int sampleRate, 
         float minFreq = 70f, 
         float maxFreq = 450f,
-        float minRms = 0.01f)
+        float minRms = 0.01f,
+        float expectedFrequency = 0f)
     {
         // Gate on volume so we don't "detect pitch" in silence
         float rms = PitchMath.ComputeRMS(buffer);
@@ -25,23 +26,44 @@ public static class PitchDetector
         for (int i = 0; i < size; i++) mean += buffer[i];
         mean /= size;
 
-        // Autocorrelation search: find lag with highest correlation
-        float bestCorr = 0f;
+        // Autocorrelation search: find lag with highest normalized correlation,
+        // lightly biased toward the selected target frequency.
+        float bestScore = 0f;
         int bestLag = 0;
+        float expectedLag = expectedFrequency > 0f ? (float)sampleRate / expectedFrequency : 0f;
 
         for (int lag = minLag; lag <= maxLag; lag++)
         {
             float corr = 0f;
+            float energyA = 0f;
+            float energyB = 0f;
+
             for (int i = 0; i < size - lag; i++)
             {
                 float a = buffer[i] - mean;
                 float b = buffer[i + lag] - mean;
                 corr += a * b;
+                energyA += a * a;
+                energyB += b * b;
             }
 
-            if (corr > bestCorr)
+            if (energyA <= 0f || energyB <= 0f) continue;
+
+            float normalizedCorr = corr / Mathf.Sqrt(energyA * energyB);
+            if (normalizedCorr <= 0f) continue;
+
+            float proximityWeight = 1f;
+            if (expectedLag > 0f)
             {
-                bestCorr = corr;
+                float lagDistance = Mathf.Abs(lag - expectedLag) / Mathf.Max(expectedLag, 1f);
+                proximityWeight = Mathf.Clamp01(1.15f - lagDistance);
+            }
+
+            float score = normalizedCorr * proximityWeight;
+
+            if (score > bestScore)
+            {
+                bestScore = score;
                 bestLag = lag;
             }
         }
